@@ -1,0 +1,135 @@
+<!-- Hero Banner Test 
+
+    Hypothesis: Users will be more likely to sign up for a Premium membership trial if they are prompted before downloading.
+
+    Testing considerations: 
+    * Conversion path A: The user signs up for a premium membership after clicking the "Get Started" button.
+    * Conversion path B: The user signs up for a premium membership after clicking the "View Plans" button.
+    * Conversion path C: The user downloads the program without signing up for a premiummembership.
+
+    Suggested KPIs:
+    * Conversion rate - Are users more likely to complete any conversion goal with the new layout? Are users more likely to start a new membership trial? Which conversion path has the highest value?
+    * Bounce rate - Are users more likely to exit the page without interacting when the download section is not immediately in view?
+    * Page value - Does the value for this page increase after immediate sign-ups? Or is page value attributed to "View Plans" link where users view more information about plan benefits?
+
+    Additional considerations:
+    * Mobile and Desktop (responsive) design
+    * Closely matches existing styles for seamless user experience
+    * IDs added for all text objects for ad hoc translation (ideally this would be stored on the backend):
+        #pb-t-head "Get Premium free for 2 months"
+        #pb-t-p1 "Just $9.99/month after. Cancel anytime."
+        #pb-t-btn1 "GET STARTED"
+        #pb-t-btn2 "VIEW PLANS"
+        #pb-t-terms-a "Terms and conditions apply"
+        #pb-t-terms-s ". Individual plan only. 2 months free not avilable for users who have already tried Premium. Offer ends Oct. 31, 2021"
+        #pb-t-img "Join Spotify Premium and get 2 free months."
+    
+    Test variant ideation:
+    * Since users may lack information to convert on this page, the following benefits could be added just below "Just $9.99/month after. Cancel anytime.":
+        Ad-free music listening
+        Play anywhere - even offline
+        On-demand playback
+    * Replace the above-the-fold image with a video (The number of video plays should also be recorded as to not obfuscate test results.)
+    * Add the countdown timer into a pencil banner along with copy "Hurry! Deal ends in: (Ideally end time is stored on the backend and returned to the page for manipulation relative to the users local time.)
+    * Add a countdown timer below the buttons "Get Started" and "View Plans" with copy directly above the timer. (Recommended over using a pencil banner since this is directly in the users view)
+
+    Challenges:
+    * What specifically about the banner test increased conversions from the initial test? What control/variants were tested?
+    * Is the current CTA more or less effective than the best performing ad copy? Are users more likely to cancel before the trial ends when prompted with "Cancel anytime"?
+    * What impact does the above-the-fold image have to conversion? How can this be changed for users in different countries?
+
+-->
+
+<script>
+// Check the path, execute the test on the /download/ url
+if(window.location.pathname.indexOf('/download/') > -1){
+    // Grab the current banner
+    const ex_banner = document.getElementsByTagName("section")[0];
+    
+    // Create a new banner element
+    const pb_banner_element = document.createElement('div');
+    pb_banner_element.className = 'pb-banner';
+    pb_banner_element.innerHTML = '<div class="pb-content-wrapper"><div class="pb-content-left"><h2 id="pb-t-head">Get Premium free for 2 months</h2><p id="pb-t-p1">Just $9.99/month after. Cancel anytime.</p><button class="pb-btn pb-btn-get-started" id="pb-t-btn1">Get Started</button><button class="pb-btn pb-btn-view-plans" id="pb-t-btn2">View Plans</button><p class="pb-terms"><a href="#" id="pb-t-terms-a">Terms and conditions apply</a><span id="pb-t-terms-s">. Individual plan only. 2 months free not avilable for users who have already tried Premium. Offer ends Oct. 31, 2021</span></p></div><div class="pb-content-right"><img id="pb-t-img" src="#" alt="Join Spotify Premium and get 2 free months."></div></div>';
+    
+    // Insert the new banner element
+    ex_banner.parentNode.insertBefore(pb_banner_element, ex_banner);
+}
+</script>
+
+<style>
+.pb-banner{
+    width: 100%;
+    background-color: #b49bc8;
+    display: flex;
+    padding: 40px 15px 104px;
+}
+.pb-content-wrapper{
+    display: inline-flex;
+    max-width: 970px;
+}
+.pb-content-left,.pb-content-right{
+    width: 100%;
+    padding: 15px;
+}
+.pb-content-right{
+    display: none;
+}
+.pb-content-left>h2{
+    font-size: 32px;
+    line-height: 40px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.pb-btn{
+    border-radius: 500px;
+    font-size: inherit;
+    padding: 14px 32px;
+    border: 2px solid #000;
+    width: 180px;
+    display: block;
+}
+.pb-btn-get-started{
+    background-color: #000;
+    color: #fff;
+}
+.pb-btn-view-plans{
+    background-color: transparent;
+    border: 2px solid #fff;
+    margin: 14px 0 0 0;
+}
+.pb-terms{
+    font-size: 12px;
+}
+.pb-terms>a{
+    color: #000;
+}
+
+/* Desktop banner styles */
+@media (min-width:1280px) {
+    .pb-content-wrapper{
+        width: 100%; 
+        margin: 0px auto;
+        height: 100%;
+        max-width: 1170px;
+    }
+    .pb-content-wrapper>div,.pb-btn{
+        display: inline-block;
+    }
+    .pb-content-left{
+        width: 60%;
+    }
+    .pb-content-right{
+        width: 40%;
+    }
+    .pb-content-left>h2{
+        font-size: 48px;
+        line-height: 56px;
+    }
+    .pb-content-right>img{
+        width: 100%;
+    }
+    .pb-btn-view-plans{
+        margin: 0 0 0 14px;
+    }
+}
+</style>
